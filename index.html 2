@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CleverCart - सच्ची Rating</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: Arial, sans-serif; background:#f5f5f5; }
+.header { background:#2874f0; padding:15px; text-align:center; }
+.header h1 { color:white; font-size:24px; }
+.header p { color:#ffe; font-size:12px; }
+.search-box { padding:15px; background:#fff; }
+.search-box input { width:100%; padding:12px; border:2px solid #2874f0; border-radius:8px; font-size:16px; }
+.search-box button { width:100%; margin-top:8px; padding:12px; background:#ff6000; color:white; border:none; border-radius:8px; font-size:16px; }
+.product { background:white; margin:10px; border-radius:10px; padding:15px; box-shadow:0 2px 5px rgba(0,0,0,0.1); }
+.product h3 { font-size:16px; margin-bottom:8px; }
+.rating-row { display:flex; justify-content:space-between; margin:5px 0; }
+.fake { color:#ff0000; font-weight:bold; }
+.real { color:#00a000; font-weight:bold; }
+.good { background:#e8f5e9; padding:8px; border-radius:5px; margin:5px 0; }
+.bad { background:#fce4e4; padding:8px; border-radius:5px; margin:5px 0; }
+.buy-btn { background:#ff6000; color:white; border:none; padding:10px 20px; border-radius:5px; width:100%; margin-top:10px; font-size:14px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🛒 CleverCart</h1>
+  <p>सच्ची Rating • असली Reviews • स्मार्ट खरीदारी</p>
+</div>
+
+<div class="search-box">
+  <input type="text" id="search" placeholder="Product खोजो... जैसे boAt earphones">
+  <button onclick="searchProduct()">🔍 Search करो</button>
+</div>
+
+<div id="results"></div>
+
+<script>
+const products = [
+  {
+    name: "boAt Airdopes 131",
+    amazonRating: "4.2⭐",
+    realRating: "6.1/10",
+    good: ["Bass अच्छा है", "Price सही है", "Battery ठीक है"],
+    bad: ["Build quality कमज़ोर", "Mic खराब", "2 माह में टूट सकता है"],
+    link: "https://amazon.in"
+  },
+  {
+    name: "Samsung Galaxy F15",
+    amazonRating: "4.4⭐",
+    realRating: "7.2/10",
+    good: ["Battery शानदार", "Display अच्छी", "Camera ठीक है"],
+    bad: ["Slow charging", "Heavy है", "Software updates कम"],
+    link: "https://flipkart.com"
+  },
+  {
+    name: "Prestige Mixer Grinder",
+    amazonRating: "4.3⭐",
+    realRating: "5.8/10",
+    good: ["Power अच्छा", "Jars अच्छे", "Brand reliable"],
+    bad: ["Noise बहुत है", "Service slow", "Warranty issues"],
+    link: "https://amazon.in"
+  }
+];
+
+function searchProduct() {
+  const query = document.getElementById('search').value.toLowerCase();
+  const results = document.getElementById('results');
+  results.innerHTML = '';
+  
+  if(!query) {
+    results.innerHTML = '<p style="text-align:center;padding:20px">कुछ तो search करो भाई! 😄</p>';
+    return;
+  }
+
+  const found = products.filter(p => p.name.toLowerCase().includes(query));
+  
+  if(found.length === 0) {
+    results.innerHTML = '<p style="text-align:center;padding:20px">😔 Product नहीं मिला — जल्द add होगा!</p>';
+    return;
+  }
+
+  found.forEach(p => {
+    results.innerHTML += `
+      <div class="product">
+        <h3>${p.name}</h3>
+        <div class="rating-row">
+          <span>Amazon Rating:</span>
+          <span class="fake">${p.amazonRating} (Fake हो सकती है)</span>
+        </div>
+        <div class="rating-row">
+          <span>CleverCart Real:</span>
+          <span class="real">⭐${p.realRating}</span>
+        </div>
+        <div class="good">
+          <b>✅ अच्छा:</b><br>
+          ${p.good.map(g => '• ' + g).join('<br>')}
+        </div>
+        <div class="bad">
+          <b>❌ बुरा:</b><br>
+          ${p.bad.map(b => '• ' + b).join('<br>')}
+        </div>
+        <button class="buy-btn" onclick="window.open('${p.link}')">🛒 खरीदो यहाँ से</button>
+      </div>`;
+  });
+}
+</script>
+</body>
+</html>
