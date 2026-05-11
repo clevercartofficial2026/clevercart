@@ -1,21 +1,442 @@
-✅ Deal of the Day — Navy card
-✅ 9 Categories
-✅ Trending Products
-✅ Top Rated List
-✅ Correct Icons — ▶YouTube, 👽Reddit, G Google, ✕Twitter
-✅ Rating — 5 Star system
-✅ Fake Review Detector
-✅ Quick Specs — Processor सबसे ऊपर
-✅ Expert Score bars
-✅ Best For ✅ / Not For ❌
-✅ 8 Sources Analysis
-✅ Trust Score
-✅ What's Good ✔ (Green) / What's Bad ✕ (Red)
-✅ AI Verdict
-✅ Buy Now or Wait
-✅ Price Compare — 5 sites
-✅ EMI Option
-✅ Similar Products — 3
-✅ CleverCart Certified badge
-✅ Inter Font
-✅ Super Fast Loading
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CleverCart — Real Ratings, Smart Shopping</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--orange:#FF6B2B;--orange2:#FF8C00;--green:#00A651;--green2:#00C853;--red:#E53935;--blue:#1565C0;--yellow:#F9A825;--purple:#7B1FA2;--navy:#1A1A2E;--bg:#F2F4F8;--white:#FFFFFF;--border:#E4E8F0;--text:#1A1A2E;--text2:#5A5A72;--text3:#9A9AB0;--shadow:0 2px 16px rgba(0,0,0,0.07)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter','Noto Sans Devanagari',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+header{background:linear-gradient(135deg,var(--orange),var(--orange2));padding:12px 16px;position:sticky;top:0;z-index:200;box-shadow:0 3px 16px rgba(255,107,43,.4)}
+.hdr-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-box{width:38px;height:38px;background:white;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px}
+.logo-name{font-size:22px;font-weight:900;color:white;letter-spacing:-.5px}
+.logo-sub{font-size:9px;color:rgba(255,255,255,.85);font-weight:500}
+.hdr-badge{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);color:white;font-size:10px;padding:5px 12px;border-radius:20px;font-weight:700}
+.search-row{display:flex;gap:8px}
+.s-wrap{flex:1;background:white;border-radius:12px;display:flex;align-items:center;padding:0 14px;gap:8px}
+.s-wrap input{flex:1;border:none;outline:none;font-size:14px;padding:12px 0;font-family:'Inter',sans-serif;color:var(--text)}
+.s-wrap input::placeholder{color:var(--text3)}
+.s-btn{background:var(--navy);border:none;border-radius:10px;padding:12px 20px;color:white;font-size:13px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif}
+#homeScreen{display:block}
+#searchScreen{display:none}
+.sec-label{font-size:11px;font-weight:800;color:var(--text2);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border)}
+.deal-section{padding:16px 16px 8px}
+.deal-card{background:linear-gradient(135deg,var(--navy),#2D2D4E);border-radius:20px;padding:20px;color:white;position:relative;overflow:hidden;box-shadow:0 6px 24px rgba(26,26,46,.4)}
+.deal-card::after{content:'🔥';position:absolute;right:20px;bottom:10px;font-size:70px;opacity:.12}
+.deal-tag{background:var(--orange);font-size:10px;font-weight:800;padding:5px 12px;border-radius:20px;display:inline-block;margin-bottom:12px}
+.deal-name{font-size:20px;font-weight:800;margin-bottom:4px}
+.deal-sub{font-size:12px;opacity:.75;margin-bottom:16px}
+.deal-row{display:flex;align-items:center;justify-content:space-between}
+.deal-prices{display:flex;align-items:baseline;gap:8px}
+.deal-price{font-size:26px;font-weight:900;color:#00C853}
+.deal-og{font-size:13px;opacity:.5;text-decoration:line-through}
+.deal-save{background:var(--green);font-size:10px;font-weight:700;padding:3px 8px;border-radius:6px}
+.deal-btn{background:var(--orange);color:white;border:none;border-radius:12px;padding:12px 20px;font-size:13px;font-weight:800;cursor:pointer;font-family:'Inter',sans-serif}
+.cat-section{padding:16px 16px 8px}
+.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.cat-card{background:white;border-radius:16px;padding:16px 10px;text-align:center;cursor:pointer;border:1px solid var(--border);box-shadow:var(--shadow)}
+.cat-icon{font-size:30px;margin-bottom:8px}
+.cat-name{font-size:12px;font-weight:700;color:var(--text)}
+.cat-count{font-size:10px;color:var(--text3);margin-top:2px}
+.trending-section{padding:16px 16px 8px}
+.t-scroll{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px}
+.t-scroll::-webkit-scrollbar{display:none}
+.t-card{flex-shrink:0;width:155px;background:white;border-radius:16px;padding:14px;border:1px solid var(--border);cursor:pointer;box-shadow:var(--shadow)}
+.t-rank{font-size:10px;font-weight:800;color:var(--orange);margin-bottom:6px}
+.t-name{font-size:12px;font-weight:700;color:var(--text);margin-bottom:6px;line-height:1.3}
+.t-score{font-size:12px;font-weight:800;color:var(--green)}
+.top-section{padding:16px 16px 100px}
+.top-card{background:white;border-radius:16px;padding:14px 16px;margin-bottom:10px;border:1px solid var(--border);display:flex;align-items:center;gap:12px;cursor:pointer;box-shadow:var(--shadow)}
+.top-rank{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:white;font-size:15px;font-weight:900;flex-shrink:0}
+.rank-1{background:linear-gradient(135deg,#FFD700,#FFA000)}
+.rank-2{background:linear-gradient(135deg,#B0BEC5,#78909C)}
+.rank-3{background:linear-gradient(135deg,#FF8A65,#E64A19)}
+.rank-n{background:var(--navy)}
+.top-info{flex:1}
+.top-name{font-size:13px;font-weight:700;color:var(--text);margin-bottom:2px}
+.top-cat{font-size:10px;color:var(--text3)}
+.top-right{text-align:right}
+.top-score{font-size:17px;font-weight:900;color:var(--green)}
+.top-stars{font-size:11px;color:var(--text3)}
+.s-head{display:flex;justify-content:space-between;align-items:center;padding:14px 16px 0}
+.s-head h3{font-size:16px;font-weight:800}
+.s-count{font-size:11px;color:var(--text3)}
+.pcard{background:white;border-radius:20px;box-shadow:var(--shadow);margin:12px 16px 0;overflow:hidden;border:1px solid var(--border);animation:up .4s ease forwards;opacity:0;transform:translateY(18px)}
+@keyframes up{to{opacity:1;transform:translateY(0)}}
+.ptop{padding:16px 16px 14px;border-bottom:1px solid var(--border)}
+.ptop-row{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.pname{font-size:17px;font-weight:800;color:var(--text);line-height:1.2}
+.pcat{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-top:3px}
+.vbadge{padding:6px 12px;border-radius:10px;font-size:11px;font-weight:800;white-space:nowrap;margin-left:8px;flex-shrink:0}
+.vb-buy{background:#E8F8F0;color:var(--green);border:1.5px solid rgba(0,166,81,.25)}
+.vb-ok{background:#FFF8E1;color:var(--yellow);border:1.5px solid rgba(249,168,37,.25)}
+.cc-badge{background:linear-gradient(135deg,var(--orange),var(--orange2));color:white;font-size:10px;font-weight:800;padding:5px 12px;border-radius:20px;display:inline-flex;align-items:center;gap:4px}
+.rating-sec{padding:16px;border-bottom:1px solid var(--border)}
+.rs-title{font-size:10px;font-weight:800;color:var(--text2);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px}
+.rboxes{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.rbox{border-radius:16px;padding:16px;text-align:center}
+.rbox.fake{background:#FEF2F2;border:1.5px solid rgba(229,57,53,.2)}
+.rbox.real{background:#E8F8F0;border:1.5px solid rgba(0,166,81,.2)}
+.rb-label{font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+.rbox.fake .rb-label{color:var(--red)}
+.rbox.real .rb-label{color:var(--green)}
+.rb-stars{font-size:18px;margin-bottom:5px}
+.rb-score{font-size:26px;font-weight:900;line-height:1;margin-bottom:4px}
+.rbox.fake .rb-score{color:var(--red)}
+.rbox.real .rb-score{color:var(--green)}
+.rb-note{font-size:9px;color:var(--text3)}
+.fake-alert{background:#FFF3E0;border:1.5px solid rgba(255,152,0,.3);border-radius:12px;padding:12px 14px;display:flex;align-items:center;gap:10px}
+.fa-text{font-size:11px;color:#BF360C;font-weight:600;line-height:1.5}
+.fa-text strong{color:var(--red)}
+.specs-sec{padding:16px;border-bottom:1px solid var(--border)}
+.spec-title{font-size:10px;font-weight:800;color:var(--text2);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px}
+.spec-list{display:flex;flex-direction:column;gap:8px}
+.spec-item{display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--bg);border-radius:12px;border:1px solid var(--border)}
+.spec-icon{font-size:18px;width:28px;text-align:center;flex-shrink:0}
+.spec-label{font-size:10px;color:var(--text3);font-weight:600;text-transform:uppercase}
+.spec-value{font-size:13px;font-weight:700;color:var(--text)}
+.see-more{width:100%;background:none;border:1.5px dashed var(--border);border-radius:12px;padding:12px;font-size:12px;font-weight:700;color:var(--orange);cursor:pointer;margin-top:10px;font-family:'Inter',sans-serif}
+.expert-sec{padding:16px;border-bottom:1px solid var(--border)}
+.ex-title{font-size:10px;font-weight:800;color:var(--text2);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px}
+.ex-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.ex-name{font-size:11px;color:var(--text2);width:80px;flex-shrink:0;font-weight:600}
+.ex-bar{flex:1;height:8px;background:var(--bg);border-radius:8px;overflow:hidden;border:1px solid var(--border)}
+.ex-fill{height:100%;border-radius:8px}
+.ex-score{font-size:12px;font-weight:800;width:36px;text-align:right;flex-shrink:0}
+.bestfor-sec{padding:16px;border-bottom:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.bf-box{border-radius:14px;padding:14px}
+.bf-yes{background:#E8F8F0;border:1.5px solid rgba(0,166,81,.2)}
+.bf-no{background:#FEF2F2;border:1.5px solid rgba(229,57,53,.2)}
+.bf-title{font-size:10px;font-weight:800;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.bf-yes .bf-title{color:var(--green)}
+.bf-no .bf-title{color:var(--red)}
+.bf-item{font-size:11px;color:var(--text2);padding:3px 0;display:flex;gap:6px;align-items:flex-start;line-height:1.4}
+.bf-dot{width:5px;height:5px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.bf-yes .bf-dot{background:var(--green)}
+.bf-no .bf-dot{background:var(--red)}
+.sources-sec{padding:16px;border-bottom:1px solid var(--border)}
+.src-title{font-size:10px;font-weight:800;color:var(--text2);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px}
+.src-row{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+.src-name{font-size:11px;color:var(--text2);width:110px;flex-shrink:0;font-weight:600}
+.src-bar{flex:1;height:8px;background:var(--bg);border-radius:8px;overflow:hidden;border:1px solid var(--border)}
+.src-fill{height:100%;border-radius:8px}
+.src-pct{font-size:11px;font-weight:800;width:32px;text-align:right}
+.trust-sec{padding:16px;border-bottom:1px solid var(--border)}
+.trust-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.trust-lab{font-size:12px;font-weight:700;color:var(--text2)}
+.trust-pct{font-size:16px;font-weight:900;color:var(--green)}
+.tbar{height:12px;background:var(--bg);border-radius:12px;overflow:hidden;border:1px solid var(--border)}
+.tfill{height:100%;border-radius:12px;background:linear-gradient(90deg,var(--green),#00C853)}
+.trust-sub{font-size:10px;color:var(--text3);margin-top:6px}
+.pc-sec{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border)}
+.wg{padding:16px 14px;border-right:1px solid var(--border);background:#F0FBF5}
+.wb{padding:16px 14px;background:#FEF2F2}
+.pc-head{font-size:11px;font-weight:800;margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.wg .pc-head{color:var(--green)}
+.wb .pc-head{color:var(--red)}
+.pc-check{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;flex-shrink:0;color:white}
+.wg .pc-check{background:var(--green)}
+.wb .pc-check{background:var(--red)}
+.pc-item{font-size:11px;color:var(--text2);padding:3px 0;display:flex;gap:6px;align-items:flex-start;line-height:1.5}
+.dot{width:5px;height:5px;border-radius:50%;margin-top:6px;flex-shrink:0}
+.wg .dot{background:var(--green)}
+.wb .dot{background:var(--red)}
+.ai-sec{padding:16px;border-bottom:1px solid var(--border);background:#FFFBF5;display:flex;gap:12px;align-items:flex-start}
+.ai-tag{background:linear-gradient(135deg,var(--orange),var(--orange2));color:white;font-size:9px;font-weight:900;padding:4px 10px;border-radius:8px;white-space:nowrap;margin-top:2px}
+.ai-text{font-size:12px;color:var(--text2);line-height:1.8}
+.ai-text strong{color:var(--orange);font-weight:700}
+.bow-sec{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;gap:10px;align-items:center}
+.bow-buy{background:#E8F8F0;border:1.5px solid rgba(0,166,81,.25);border-radius:12px;padding:10px 16px;text-align:center}
+.bow-wait{background:#FFF8E1;border:1.5px solid rgba(249,168,37,.25);border-radius:12px;padding:10px 16px;text-align:center}
+.bow-icon{font-size:20px;margin-bottom:4px}
+.bow-text{font-size:11px;font-weight:700;color:var(--text2)}
+.price-sec{padding:16px;border-bottom:1px solid var(--border)}
+.ps-title{font-size:10px;font-weight:800;color:var(--text2);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px}
+.price-list{display:flex;flex-direction:column;gap:8px}
+.pi{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-radius:14px;border:1.5px solid var(--border);cursor:pointer;background:white}
+.pi.best{border-color:var(--green);background:#F0FBF5}
+.pi-l{display:flex;align-items:center;gap:12px}
+.pi-logo{font-size:22px}
+.pi-name{font-size:13px;font-weight:800;color:var(--text)}
+.pi-tag{font-size:9px;color:var(--text3)}
+.pi-r{display:flex;align-items:center;gap:8px}
+.pi-price{font-size:16px;font-weight:900;color:var(--text)}
+.pi-best{background:var(--green);color:white;font-size:9px;font-weight:800;padding:3px 8px;border-radius:6px}
+.pi-btn{background:var(--orange);color:white;border:none;border-radius:10px;padding:8px 16px;font-size:12px;font-weight:800;cursor:pointer;font-family:'Inter',sans-serif}
+.price-note{font-size:10px;color:var(--text3);margin-top:10px;text-align:center}
+.emi-sec{padding:14px 16px;border-bottom:1px solid var(--border);background:#F0F4FF;display:flex;align-items:center;gap:12px}
+.emi-icon{font-size:24px}
+.emi-text strong{display:block;font-size:13px;font-weight:800;color:var(--blue);margin-bottom:2px}
+.emi-text span{font-size:11px;color:var(--text2)}
+.emi-btn{margin-left:auto;background:var(--blue);color:white;border:none;border-radius:10px;padding:8px 14px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;white-space:nowrap}
+.similar-sec{padding:16px}
+.sim-title{font-size:10px;font-weight:800;color:var(--text2);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px}
+.sim-scroll{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px}
+.sim-scroll::-webkit-scrollbar{display:none}
+.sim-card{flex-shrink:0;width:160px;background:var(--bg);border-radius:16px;padding:14px;border:1.5px solid var(--border);cursor:pointer}
+.sim-name{font-size:12px;font-weight:700;color:var(--text);margin-bottom:4px;line-height:1.3}
+.sim-cat{font-size:10px;color:var(--text3);margin-bottom:8px}
+.sim-score{font-size:12px;font-weight:800;color:var(--orange)}
+.empty{background:white;border-radius:20px;margin:12px 16px;padding:50px 20px;text-align:center;border:1px solid var(--border)}
+.empty-e{font-size:56px;margin-bottom:14px}
+.empty h3{font-size:18px;font-weight:800;margin-bottom:8px}
+.empty p{font-size:13px;color:var(--text2);line-height:1.6}
+.bnav{position:fixed;bottom:0;left:0;right:0;background:white;border-top:1px solid var(--border);display:flex;z-index:200;padding:8px 0 16px;box-shadow:0 -4px 24px rgba(0,0,0,.08)}
+.ni{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;border:none;background:none;color:var(--text3);cursor:pointer;padding:4px 0;font-family:'Inter',sans-serif}
+.ni.active{color:var(--orange)}
+.ni-icon{font-size:24px}
+.ni-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.spacer{height:100px}
+</style>
+  </head>
+  <body>
+<header>
+  <div class="hdr-top">
+    <div class="logo">
+      <div class="logo-box">🛒</div>
+      <div>
+        <div class="logo-name">CleverCart</div>
+        <div class="logo-sub">Real Ratings • Smart Shopping • Never Get Fooled</div>
+      </div>
+    </div>
+    <div class="hdr-badge">🤖 AI Powered</div>
+  </div>
+  <div class="search-row">
+    <div class="s-wrap">
+      <span>🔍</span>
+      <input type="text" id="si" placeholder="Search any product..." onkeypress="if(event.key==='Enter')doSearch()" oninput="if(this.value==='')showHome()">
+    </div>
+    <button class="s-btn" onclick="doSearch()">Search</button>
+  </div>
+</header>
+
+<div id="homeScreen">
+  <div class="deal-section">
+    <div class="sec-label">🔥 Deal of the Day</div>
+    <div class="deal-card">
+      <div class="deal-tag">⚡ TODAY ONLY</div>
+      <div class="deal-name">boAt Airdopes 131</div>
+      <div class="deal-sub">Wireless Earphones • 24Hr Battery • Bass Boost</div>
+      <div class="deal-row">
+        <div class="deal-prices">
+          <div class="deal-price">₹699</div>
+          <div class="deal-og">₹1,299</div>
+          <div class="deal-save">46% OFF</div>
+        </div>
+        <button class="deal-btn" onclick="quickSearch('boAt')">View →</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="cat-section">
+    <div class="sec-label">📂 Shop by Category</div>
+    <div class="cat-grid">
+      <div class="cat-card" onclick="quickSearch('mobile')"><div class="cat-icon">📱</div><div class="cat-name">Mobiles</div><div class="cat-count">120+ products</div></div>
+      <div class="cat-card" onclick="quickSearch('earphones')"><div class="cat-icon">🎧</div><div class="cat-name">Audio</div><div class="cat-count">85+ products</div></div>
+      <div class="cat-card" onclick="quickSearch('laptop')"><div class="cat-icon">💻</div><div class="cat-name">Laptops</div><div class="cat-count">60+ products</div></div>
+      <div class="cat-card" onclick="quickSearch('tv')"><div class="cat-icon">📺</div><div class="cat-name">TVs</div><div class="cat-count">45+ products</div></div>
+      <div class="cat-card" onclick="quickSearch('appliance')"><div class="cat-icon">🏠</div><div class="cat-name">Appliances</div><div class="cat-count">90+ products</div></div>
+      <div class="cat-card" onclick="quickSearch('beauty')"><div class="cat-icon">💄</div><div class="cat-name">Style & Beauty</div><div class="cat-count">200+ products</div></div>
+      <div class="cat-card" onclick="quickSearch('gaming')"><div class="cat-icon">🎮</div><div class="cat-name">Gaming</div><div class="cat-count">70+ products</div></div>
+      <div class="cat-card" onclick="quickSearch('sports')"><div class="cat-icon">🏋️</div><div class="cat-name">Sports</div><div class="cat-count">110+ products</div></div>
+      <div class="cat-card" onclick="quickSearch('kitchen')"><div class="cat-icon">🍳</div><div class="cat-name">Kitchen</div><div class="cat-count">95+ products</div></div>
+    </div>
+  </div>
+
+  <div class="trending-section">
+    <div class="sec-label">📈 Trending Now</div>
+    <div class="t-scroll">
+      <div class="t-card" onclick="quickSearch('OnePlus')"><div class="t-rank">#1 TRENDING 🔥</div><div class="t-name">OnePlus Nord CE 3 Lite</div><div class="t-score">✅ 3.8/5 Real</div></div>
+      <div class="t-card" onclick="quickSearch('Redmi')"><div class="t-rank">#2 TRENDING 📈</div><div class="t-name">Redmi Note 13 Pro</div><div class="t-score">✅ 3.7/5 Real</div></div>
+      <div class="t-card" onclick="quickSearch('Samsung')"><div class="t-rank">#3 TRENDING ⚡</div><div class="t-name">Samsung Galaxy F15</div><div class="t-score">✅ 3.6/5 Real</div></div>
+      <div class="t-card" onclick="quickSearch('boAt')"><div class="t-rank">#4 TRENDING 🎧</div><div class="t-name">boAt Airdopes 131</div><div class="t-score">⚠️ 3.1/5 Real</div></div>
+    </div>
+  </div>
+
+  <div class="top-section">
+    <div class="sec-label">🏆 Top Rated This Week</div>
+    <div class="top-card" onclick="quickSearch('OnePlus')"><div class="top-rank rank-1">1</div><div class="top-info"><div class="top-name">OnePlus Nord CE 3 Lite</div><div class="top-cat">Smartphone</div></div><div class="top-right"><div class="top-score">3.8/5</div><div class="top-stars">⭐⭐⭐✨</div></div></div>
+    <div class="top-card" onclick="quickSearch('Redmi')"><div class="top-rank rank-2">2</div><div class="top-info"><div class="top-name">Redmi Note 13 Pro</div><div class="top-cat">Smartphone</div></div><div class="top-right"><div class="top-score">3.7/5</div><div class="top-stars">⭐⭐⭐✨</div></div></div>
+    <div class="top-card" onclick="quickSearch('Samsung')"><div class="top-rank rank-3">3</div><div class="top-info"><div class="top-name">Samsung Galaxy F15</div><div class="top-cat">Smartphone</div></div><div class="top-right"><div class="top-score">3.6/5</div><div class="top-stars">⭐⭐⭐⭐</div></div></div>
+    <div class="top-card" onclick="quickSearch('HP')"><div class="top-rank rank-n">4</div><div class="top-info"><div class="top-name">HP 15s Laptop i3</div><div class="top-cat">Laptop</div></div><div class="top-right"><div class="top-score">3.4/5</div><div class="top-stars">⭐⭐⭐✨</div></div></div>
+    <div class="top-card" onclick="quickSearch('boAt')"><div class="top-rank rank-n" style="background:var(--purple)">5</div><div class="top-info"><div class="top-name">boAt Airdopes 131</div><div class="top-cat">Earphones</div></div><div class="top-right"><div class="top-score">3.1/5</div><div class="top-stars">⭐⭐⭐</div></div></div>
+  </div>
+</div>
+
+<div id="searchScreen">
+  <div class="s-head"><h3>📊 Results</h3><span class="s-count" id="rcount"></span></div>
+  <div id="results"></div>
+  <div class="spacer"></div>
+</div>
+
+<div class="bnav">
+  <button class="ni active" onclick="goHome(this)"><div class="ni-icon">🏠</div><div class="ni-label">Home</div></button>
+  <button class="ni" onclick="setNav(this)"><div class="ni-icon">🔍</div><div class="ni-label">Search</div></button>
+  <button class="ni" onclick="setNav(this)"><div class="ni-icon">❤️</div><div class="ni-label">Saved</div></button>
+  <button class="ni" onclick="setNav(this)"><div class="ni-icon">👤</div><div class="ni-label">Profile</div></button>
+  </div>
+  <script>
+const P=[
+{name:"boAt Airdopes 131",cat:"Wireless Earphones",brand:"boAt",
+specs:[{icon:"🔊",label:"Driver",value:"6mm Dynamic"},{icon:"📡",label:"Bluetooth",value:"v5.0"},{icon:"🔋",label:"Battery",value:"24 Hours Total"},{icon:"💧",label:"Water Resist",value:"IPX4 Rated"},{icon:"⚖️",label:"Weight",value:"38g"},{icon:"🎙️",label:"Mic",value:"Built-in"}],
+expert:[{name:"Sound",pct:72,color:"#FF6B2B"},{name:"Build",pct:38,color:"#E53935"},{name:"Battery",pct:75,color:"#00A651"},{name:"Value",pct:80,color:"#1565C0"}],
+bestFor:["Budget buyers","Casual music lovers","Short commutes"],
+notFor:["Long term use","Calls/meetings","Gym workouts"],
+amazonRating:4.2,realRating:3.1,verdict:"ok",vText:"⚠️ Budget Pick",fakeP:38,bow:"wait",bowText:"Price may drop ₹100 next week",
+sources:[{name:"▶ YouTube",pct:58,color:"#FF0000"},{name:"👽 Reddit",pct:52,color:"#FF4500"},{name:"G Google",pct:65,color:"#4285F4"},{name:"✕ Twitter",pct:55,color:"#000000"},{name:"f Facebook",pct:60,color:"#1877F2"},{name:"📷 Instagram",pct:58,color:"#E1306C"},{name:"📝 Tech Blogs",pct:62,color:"#00838F"},{name:"🎓 Experts",pct:65,color:"#7B1FA2"}],
+trustScore:61,
+good:["Bass quality is good","Price is affordable","24hr battery life","Lightweight & comfortable"],
+bad:["Build quality is weak","Mic quality is poor","May break in 2 months","Not sweat-proof for gym"],
+summary:"For budget earphones, <strong>sound quality is decent</strong> but <strong>durability is the biggest concern</strong>.",
+similar:["Noise Buds VS104","Realme Buds Air 3","JBL Tune 215BT"],
+emi:"₹58/month",
+prices:[{site:"Meesho",icon:"🛍️",price:"₹699",best:true},{site:"Flipkart",icon:"🛒",price:"₹799",best:false},{site:"Amazon",icon:"📦",price:"₹849",best:false},{site:"Snapdeal",icon:"🏷️",price:"₹899",best:false},{site:"Croma",icon:"🏪",price:"₹999",best:false}]},
+
+{name:"Samsung Galaxy F15 5G",cat:"Smartphone",brand:"Samsung",
+specs:[{icon:"💠",label:"Processor",value:"Exynos 1330 Octa"},{icon:"🧠",label:"RAM",value:"8GB LPDDR4X"},{icon:"💾",label:"Storage",value:"128GB UFS 2.2"},{icon:"📱",label:"Display",value:"6.5\" Super AMOLED"},{icon:"📷",label:"Camera",value:"50MP+5MP+2MP"},{icon:"🔋",label:"Battery",value:"6000mAh 25W"}],
+expert:[{name:"Display",pct:85,color:"#1565C0"},{name:"Battery",pct:90,color:"#00A651"},{name:"Camera",pct:65,color:"#FF6B2B"},{name:"Performance",pct:70,color:"#7B1FA2"}],
+bestFor:["Battery backup needed","Students","Social media users"],
+notFor:["Heavy gaming","Video editing","Photography enthusiasts"],
+amazonRating:4.4,realRating:3.6,verdict:"buy",vText:"✅ Best Buy",fakeP:22,bow:"buy",bowText:"Best time to buy — stable price",
+sources:[{name:"▶ YouTube",pct:74,color:"#FF0000"},{name:"👽 Reddit",pct:70,color:"#FF4500"},{name:"G Google",pct:78,color:"#4285F4"},{name:"✕ Twitter",pct:68,color:"#000000"},{name:"f Facebook",pct:72,color:"#1877F2"},{name:"📷 Instagram",pct:70,color:"#E1306C"},{name:"📝 Tech Blogs",pct:75,color:"#00838F"},{name:"🎓 Experts",pct:75,color:"#7B1FA2"}],
+trustScore:72,
+good:["Excellent 6000mAh battery","Super AMOLED display","5G support","Samsung reliability"],
+bad:["Slow 25W charging","Average camera","Plastic build","Slightly heavy"],
+summary:"In this price range, <strong>battery and display are genuinely impressive</strong>. Samsung's <strong>after-sales service</strong> adds peace of mind.",
+similar:["Redmi Note 13","Realme Narzo 60","Moto G84 5G"],
+emi:"₹1,042/month",
+prices:[{site:"Flipkart",icon:"🛒",price:"₹12,499",best:true},{site:"Amazon",icon:"📦",price:"₹12,999",best:false},{site:"Samsung.com",icon:"🏪",price:"₹13,499",best:false},{site:"Croma",icon:"🏬",price:"₹13,999",best:false},{site:"Reliance",icon:"🏷️",price:"₹14,499",best:false}]},
+
+{name:"OnePlus Nord CE 3 Lite",cat:"Smartphone",brand:"OnePlus",
+specs:[{icon:"💠",label:"Processor",value:"Snapdragon 695 5G"},{icon:"🧠",label:"RAM",value:"8GB LPDDR4X"},{icon:"💾",label:"Storage",value:"128GB UFS 2.2"},{icon:"📱",label:"Display",value:"6.72\" LCD 120Hz"},{icon:"📷",label:"Camera",value:"108MP+2MP+2MP"},{icon:"🔋",label:"Battery",value:"5000mAh 67W"}],
+expert:[{name:"Charging",pct:95,color:"#FF6B2B"},{name:"Software",pct:88,color:"#00A651"},{name:"Camera",pct:72,color:"#1565C0"},{name:"Build",pct:62,color:"#F9A825"}],
+bestFor:["Fast charging needed","Smooth UI lovers","5G ready buyers"],
+notFor:["Premium feel lovers","Night photography","Outdoor use"],
+amazonRating:4.1,realRating:3.8,verdict:"buy",vText:"✅ Recommended",fakeP:18,bow:"buy",bowText:"Great value — buy now!",
+sources:[{name:"▶ YouTube",pct:78,color:"#FF0000"},{name:"👽 Reddit",pct:76,color:"#FF4500"},{name:"G Google",pct:80,color:"#4285F4"},{name:"✕ Twitter",pct:74,color:"#000000"},{name:"f Facebook",pct:76,color:"#1877F2"},{name:"📷 Instagram",pct:74,color:"#E1306C"},{name:"📝 Tech Blogs",pct:79,color:"#00838F"},{name:"🎓 Experts",pct:79,color:"#7B1FA2"}],
+trustScore:75,
+good:["67W Super Fast Charging","Smooth OxygenOS","108MP camera","5G ready"],
+bad:["Plastic body","Average speakers","No IP rating","Night camera average"],
+summary:"<strong>67W charging at this price is unmatched</strong>. OxygenOS provides a <strong>smooth clean experience</strong>. Solid mid-range choice.",
+similar:["Samsung Galaxy F15","Redmi Note 13 Pro","Realme 11 Pro"],
+emi:"₹1,500/month",
+prices:[{site:"OnePlus.in",icon:"🏪",price:"₹17,999",best:true},{site:"Amazon",icon:"📦",price:"₹18,499",best:false},{site:"Flipkart",icon:"🛒",price:"₹18,999",best:false},{site:"Croma",icon:"🏬",price:"₹19,499",best:false},{site:"Reliance",icon:"🏷️",price:"₹19,999",best:false}]},
+
+{name:"Prestige Iris 750W Mixer",cat:"Kitchen Appliance",brand:"Prestige",
+specs:[{icon:"⚡",label:"Power",value:"750 Watts"},{icon:"🔢",label:"Speed",value:"3 Speed + Pulse"},{icon:"🫙",label:"Jars",value:"3 Stainless Jars"},{icon:"🛡️",label:"Warranty",value:"2 Years Motor"},{icon:"⚖️",label:"Weight",value:"3.2 kg"},{icon:"🎨",label:"Color",value:"White & Grey"}],
+expert:[{name:"Power",pct:78,color:"#FF6B2B"},{name:"Durability",pct:55,color:"#E53935"},{name:"Noise",pct:30,color:"#E53935"},{name:"Value",pct:65,color:"#F9A825"}],
+bestFor:["Heavy grinding","Occasional use","Budget kitchen"],
+notFor:["Daily heavy use","Noise-sensitive homes","Small families"],
+amazonRating:4.3,realRating:2.9,verdict:"ok",vText:"⚠️ Consider Others",fakeP:45,bow:"wait",bowText:"Better options at similar price",
+sources:[{name:"▶ YouTube",pct:55,color:"#FF0000"},{name:"👽 Reddit",pct:50,color:"#FF4500"},{name:"G Google",pct:62,color:"#4285F4"},{name:"✕ Twitter",pct:48,color:"#000000"},{name:"f Facebook",pct:58,color:"#1877F2"},{name:"📷 Instagram",pct:52,color:"#E1306C"},{name:"📝 Tech Blogs",pct:60,color:"#00838F"},{name:"🎓 Experts",pct:60,color:"#7B1FA2"}],
+trustScore:55,
+good:["750W motor is powerful","Trusted Prestige brand","3 jars included","2 year warranty"],
+bad:["Makes very loud noise","Overheats after 10 min","Few service centers","Heavy weight"],
+summary:"Prestige is a <strong>trusted brand</strong> but this model has <strong>noise and overheating issues</strong>. Consider Bajaj or Philips instead.",
+similar:["Bajaj Rex 500W","Philips HL7756","Butterfly Jet Elite"],
+emi:"₹183/month",
+prices:[{site:"Amazon",icon:"📦",price:"₹2,199",best:true},{site:"Flipkart",icon:"🛒",price:"₹2,299",best:false},{site:"Meesho",icon:"🛍️",price:"₹2,399",best:false},{site:"BigBasket",icon:"🥬",price:"₹2,499",best:false},{site:"Croma",icon:"🏪",price:"₹2,699",best:false}]},
+
+{name:"Redmi Note 13 Pro",cat:"Smartphone",brand:"Xiaomi",
+specs:[{icon:"💠",label:"Processor",value:"Dimensity 7200 5G"},{icon:"🧠",label:"RAM",value:"8GB LPDDR5"},{icon:"💾",label:"Storage",value:"256GB UFS 2.2"},{icon:"📱",label:"Display",value:"6.67\" AMOLED 120Hz"},{icon:"📷",label:"Camera",value:"200MP+8MP+2MP"},{icon:"🔋",label:"Battery",value:"5100mAh 67W"}],
+expert:[{name:"Camera",pct:92,color:"#FF6B2B"},{name:"Display",pct:88,color:"#1565C0"},{name:"Software",pct:65,color:"#F9A825"},{name:"Value",pct:85,color:"#00A651"}],
+bestFor:["Photography lovers","AMOLED display seekers","Value hunters"],
+notFor:["Clean UI lovers","Privacy conscious","Heavy gamers"],
+amazonRating:4.3,realRating:3.7,verdict:"buy",vText:"✅ Value for Money",fakeP:25,bow:"buy",bowText:"200MP at this price — buy now!",
+sources:[{name:"▶ YouTube",pct:76,color:"#FF0000"},{name:"👽 Reddit",pct:72,color:"#FF4500"},{name:"G Google",pct:79,color:"#4285F4"},{name:"✕ Twitter",pct:70,color:"#000000"},{name:"f Facebook",pct:74,color:"#1877F2"},{name:"📷 Instagram",pct:78,color:"#E1306C"},{name:"📝 Tech Blogs",pct:77,color:"#00838F"},{name:"🎓 Experts",pct:77,color:"#7B1FA2"}],
+trustScore:74,
+good:["200MP camera outstanding","AMOLED 120Hz display","67W fast charging","Slim premium design"],
+bad:["MIUI has ads","Slow updates","Bloatware present","Gets warm gaming"],
+summary:"<strong>200MP camera at ₹24K is outstanding</strong>. AMOLED display is class-leading. <strong>MIUI ads are annoying</strong> but manageable.",
+similar:["OnePlus Nord CE 3","Samsung Galaxy F15","Realme 11 Pro+"],
+emi:"₹2,000/month",
+prices:[{site:"Flipkart",icon:"🛒",price:"₹23,999",best:true},{site:"Amazon",icon:"📦",price:"₹24,499",best:false},{site:"Mi.com",icon:"🏪",price:"₹24,999",best:false},{site:"Croma",icon:"🏬",price:"₹25,499",best:false},{site:"Reliance",icon:"🏷️",price:"₹25,999",best:false}]}
+];
+
+function getStars(r){let s='';const f=Math.floor(r);for(let i=0;i<f;i++)s+='⭐';if(r-f>=0.5)s+='✨';return s;}
+function quickSearch(t){document.getElementById('si').value=t;doSearch();}
+function showHome(){document.getElementById('homeScreen').style.display='block';document.getElementById('searchScreen').style.display='none';}
+function goHome(el){setNav(el);showHome();document.getElementById('si').value='';}
+function setNav(el){document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));el.classList.add('active');}
+
+function doSearch(){
+  const q=document.getElementById('si').value.toLowerCase().trim();
+  if(!q){showHome();return;}
+  document.getElementById('homeScreen').style.display='none';
+  document.getElementById('searchScreen').style.display='block';
+  const r=document.getElementById('results');
+  const rc=document.getElementById('rcount');
+  r.innerHTML='';
+  const f=P.filter(p=>p.name.toLowerCase().includes(q)||p.cat.toLowerCase().includes(q)||p.brand.toLowerCase().includes(q));
+  rc.textContent=f.length>0?f.length+' results':'';
+  if(f.length===0){r.innerHTML=`<div class="empty"><div class="empty-e">🔍</div><h3>Product not found</h3><p>Try: boAt, Samsung, OnePlus, Prestige, Redmi</p></div>`;return;}
+  f.forEach((p,i)=>{
+    const vbc=p.verdict==='buy'?'vb-buy':'vb-ok';
+    r.innerHTML+=`<div class="pcard" style="animation-delay:${i*.1}s">
+      <div class="ptop">
+        <div class="ptop-row">
+          <div><div class="pname">${p.name}</div><div class="pcat">${p.cat} • ${p.brand}</div></div>
+          <div class="vbadge ${vbc}">${p.vText}</div>
+        </div>
+        <div class="cc-badge">✅ CleverCart Certified</div>
+      </div>
+      <div class="rating-sec">
+        <div class="rs-title">⭐ Rating Comparison</div>
+        <div class="rboxes">
+          <div class="rbox fake"><div class="rb-label">⚠️ Amazon/Flipkart</div><div class="rb-stars">${getStars(p.amazonRating)}</div><div class="rb-score">${p.amazonRating}/5</div><div class="rb-note">May be inflated</div></div>
+          <div class="rbox real"><div class="rb-label">✅ CleverCart Real</div><div class="rb-stars">${getStars(p.realRating)}</div><div class="rb-score">${p.realRating}/5</div><div class="rb-note">Verified by 8 Sources</div></div>
+        </div>
+        <div class="fake-alert"><span>🕵️</span><div class="fa-text">Fake Detector: <strong>${p.fakeP}% reviews suspicious</strong> — AI filtered for accurate rating</div></div>
+      </div>
+      <div class="specs-sec">
+        <div class="spec-title">⚡ Quick Specs</div>
+        <div class="spec-list">${p.specs.map(s=>`<div class="spec-item"><div class="spec-icon">${s.icon}</div><div style="flex:1"><div class="spec-label">${s.label}</div><div class="spec-value">${s.value}</div></div></div>`).join('')}</div>
+        <button class="see-more">+ See Full Specifications</button>
+      </div>
+      <div class="expert-sec">
+        <div class="ex-title">📊 Expert Score</div>
+        ${p.expert.map(e=>`<div class="ex-row"><div class="ex-name">${e.name}</div><div class="ex-bar"><div class="ex-fill" style="width:${e.pct}%;background:${e.color}"></div></div><div class="ex-score" style="color:${e.color}">${e.pct}</div></div>`).join('')}
+      </div>
+      <div class="bestfor-sec">
+        <div class="bf-box bf-yes"><div class="bf-title">✅ Best For</div>${p.bestFor.map(x=>`<div class="bf-item"><div class="bf-dot"></div><span>${x}</span></div>`).join('')}</div>
+        <div class="bf-box bf-no"><div class="bf-title">❌ Not For</div>${p.notFor.map(x=>`<div class="bf-item"><div class="bf-dot"></div><span>${x}</span></div>`).join('')}</div>
+      </div>
+      <div class="sources-sec">
+        <div class="src-title">🌐 Social Media Analysis</div>
+        ${p.sources.map(s=>`<div class="src-row"><div class="src-name">${s.name}</div><div class="src-bar"><div class="src-fill" style="width:${s.pct}%;background:${s.color}"></div></div><div class="src-pct" style="color:${s.color}">${s.pct}%</div></div>`).join('')}
+      </div>
+      <div class="trust-sec">
+        <div class="trust-row"><span class="trust-lab">🛡️ Overall Trust Score</span><span class="trust-pct">${p.trustScore}%</span></div>
+        <div class="tbar"><div class="tfill" style="width:${p.trustScore}%"></div></div>
+        <div class="trust-sub">Based on ${p.trustScore}% positive signals from 8 sources</div>
+      </div>
+      <div class="pc-sec">
+        <div class="wg"><div class="pc-head"><div class="pc-check">✔</div> What's Good</div>${p.good.map(x=>`<div class="pc-item"><div class="dot"></div><span>${x}</span></div>`).join('')}</div>
+        <div class="wb"><div class="pc-head"><div class="pc-check">✕</div> What's Bad</div>${p.bad.map(x=>`<div class="pc-item"><div class="dot"></div><span>${x}</span></div>`).join('')}</div>
+      </div>
+      <div class="ai-sec"><span class="ai-tag">🤖 AI VERDICT</span><div class="ai-text">${p.summary}</div></div>
+      <div class="bow-sec">
+        <div class="${p.bow==='buy'?'bow-buy':'bow-wait'}"><div class="bow-icon">${p.bow==='buy'?'✅':'⏳'}</div><div class="bow-text">${p.bow==='buy'?'Buy Now!':'Wait'}</div></div>
+        <div style="flex:2;font-size:11px;color:var(--text2);line-height:1.5">💡 ${p.bowText}</div>
+      </div>
+      <div class="price-sec">
+        <div class="ps-title">💰 Price Comparison — Cheapest First</div>
+        <div class="price-list">${p.prices.map(pr=>`<div class="pi ${pr.best?'best':''}"><div class="pi-l"><div class="pi-logo">${pr.icon}</div><div><div class="pi-name">${pr.site}</div><div class="pi-tag">${pr.best?'✅ Cheapest':'Free Delivery'}</div></div></div><div class="pi-r"><div class="pi-price">${pr.price}</div>${pr.best?'<span class="pi-best">BEST</span>':''}<button class="pi-btn">Buy</button></div></div>`).join('')}</div>
+        <div class="price-note">💡 Prices updated daily</div>
+      </div>
+      <div class="emi-sec"><div class="emi-icon">💳</div><div class="emi-text"><strong>EMI from ${p.emi}</strong><span>No-cost EMI • 0% interest</span></div><button class="emi-btn">View Plans</button></div>
+      <div class="similar-sec">
+        <div class="sim-title">🔁 Similar Products</div>
+        <div class="sim-scroll">${p.similar.map(s=>`<div class="sim-card" onclick="quickSearch('${s.split(' ')[0]}')"><div class="sim-name">${s}</div><div class="sim-cat">${p.cat}</div><div class="sim-score">View Rating →</div></div>`).join('')}</div>
+      </div>
+    </div>`;
+  });
+}
+</script>
+</body>
+</html>
