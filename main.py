@@ -64,4 +64,3 @@ def get_resources():
 if __name__ == '__main__':
     # पोर्ट 5000 सेट है ताकि GitHub Codespaces इसे आसानी से पकड़ सके
     app.run(host='0.0.0.0', port=5000, debug=True)
-
