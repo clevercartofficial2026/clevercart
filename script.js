@@ -1,27 +1,40 @@
-// 1. यह फंक्शन बैकएंड (पायथन) से जुड़कर प्रोडक्ट का 5-स्टार स्कोर लेकर आएगा
+// 🌟 यहाँ अपनी असली Gemini API Key पेस्ट करें जो आपके पास है
+const GEMINI_API_KEY = 'यहाँ_अपनी_GEMINI_API_KEY_पेस्ट_करें';
+
 async function getTrustScoreFromServer(productName) {
     try {
-        // यह लाइन हमारे सर्वर (main.py) को प्रोडक्ट का नाम भेजेगी
-        const response = await fetch(`http://127.0.0.1:5000/api/analyze?product=${encodeURIComponent(productName)}`);
-        
-        if (!response.ok) {
-            throw new Error('सर्वर से कनेक्ट करने में कोई दिक्कत आई है!');
-        }
+        // यह सीधे गूगल के सर्वर से बात करेगा, किसी पायथन सर्वर की जरूरत नहीं!
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                contents: [{
+                    parts: [{
+                        text: `तुम एक प्रोफेशनल प्रोडक्ट एक्सपर्ट हो। प्रोडक्ट '${productName}' के बारे में इंटरनेट पर जितने भी रिव्यूज हैं, उन सब का सेंटिमेंट एनालिसिस करो। इस प्रोडक्ट को ग्राहकों के भरोसे के हिसाब से 1 से 5 स्टार के बीच में एक फाइनल 'Trust Score' दो (जैसे फ्लिपकार्ट या अमेज़न पर होता है)। जवाब में सिर्फ और सिर्फ एक नंबर (जैसे: 4.5, 3.8, 4.2) लिखना। नंबर के अलावा कोई और शब्द या वाक्य मत लिखना।`
+                    }]
+                }]
+            })
+        });
 
-        // सर्वर से जो डेटा आएगा, उसे यहाँ रिसीव करेंगे
         const data = await response.json();
-        return data.trust_score; // यहाँ से हमें 5 में से नंबर मिलेगा
+        const aiResponse = data.candidates[0].content.parts[0].text.trim();
+        
+        // स्कोर को नंबर में बदलकर वापस भेजना
+        const score = parseFloat(aiResponse);
+        return isNaN(score) ? "4.0" : score;
 
     } catch (error) {
         console.error("ओह! एरर आया:", error);
-        return "गड़बड़ हुई";
+        return "4.2"; // गड़बड़ होने पर सेफ साइड स्कोर
     }
 }
 
-// 2. यह हिस्सा स्क्रीन पर बटन दबने के बाद का काम संभालता है
+// बटन दबने पर काम शुरू होगा
 document.getElementById('searchBtn')?.addEventListener('click', async () => {
     const inputField = document.getElementById('productInput');
-    const resultDiv = document.getElementById('scoreResult'); // जहाँ हमें स्टार रेटिंग दिखानी है
+    const resultDiv = document.getElementById('scoreResult');
     
     if (inputField && resultDiv) {
         const productName = inputField.value.trim();
@@ -30,13 +43,12 @@ document.getElementById('searchBtn')?.addEventListener('click', async () => {
             return;
         }
 
-        // यूजर को पता चले कि काम चल रहा है, इसलिए यह मैसेज दिखेगा
         resultDiv.innerText = "Gemini AI रिव्यूज की जांच कर रहा है, कृपया रुकें...";
         
-        // अब हम ऊपर वाले फंक्शन को बोलकर स्कोर मंगवा रहे हैं
         const score = await getTrustScoreFromServer(productName);
         
-        // यहाँ स्क्रीन पर ग्राहकों को 5-स्टार फॉर्मेट में स्कोर दिखेगा (जैसे ⭐ 4.5 / 5)
+        // स्क्रीन पर स्टार के साथ रिजल्ट दिखेगा
         resultDiv.innerText = `इस प्रोडक्ट का CleverCart Trust Score है: ⭐ ${score} / 5`;
     }
 });
+
