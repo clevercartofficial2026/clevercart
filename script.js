@@ -1,47 +1,44 @@
-const allSources = [
-  "YouTube API", "Reddit Threads", "Twitter Sentiment", 
-  "Consumer Complaints", "MouthShut India", "Google Trust Index",
-  "Tech Forums", "GitHub Issues", "Trustpilot", "Expert Blogs"
-];
+// 1. जब यूजर हमारी वेबसाइट पर "Search" या "Analyze" बटन दबाएगा, तब यह काम शुरू होगा
+async function getTrustScoreFromServer(productName) {
+    try {
+        // 2. यह लाइन हमारे पायथन बैकएंड (analyzer.py) को प्रोडक्ट का नाम भेजेगी
+        // अभी हम इसे लोकल सर्वर (localhost) के लिए सेट कर रहे हैं
+        const response = await fetch(`http://127.0.0.1:5000/api/analyze?product=${encodeURIComponent(productName)}`);
+        
+        if (!response.ok) {
+            throw new Error('सर्वर से कनेक्ट करने में कोई दिक्कत आई है!');
+        }
 
-async function doSearch() {
-  const query = document.getElementById('si').value.trim();
-  if(!query) {
-    alert("कृपया प्रोडक्ट का नाम लिखें!");
-    return;
-  }
+        // 3. सर्वर से जो स्कोर आएगा, उसे यहाँ रिसीव करेंगे
+        const data = await response.json();
+        return data.trust_score;
 
-  // UI छुपाना और लोडर दिखाना
-  document.getElementById('aiLoader').style.display = 'block';
-  document.getElementById('resultScreen').style.display = 'none';
-  const sourceDiv = document.getElementById('sourceStatus');
-  const pBar = document.getElementById('pBar');
-  const percentText = document.getElementById('percent');
-  sourceDiv.innerHTML = '';
+    } catch (error) {
+        console.error("ओह! एरर आया:", error);
+        return "गड़बड़ हुई";
+    }
+}
 
-  // 10 सोर्सेस को स्कैन करने का एनीमेशन
-  for(let i=0; i < allSources.length; i++) {
-    const sItem = document.createElement('div');
-    sItem.className = 'source-item';
-    sItem.innerHTML = `⏳ Scanning ${allSources[i]}...`;
-    sourceDiv.appendChild(sItem);
-
-    // थोड़ा इंतज़ार ताकि यूजर को लगे कि AI काम कर रहा है
-    await new Promise(r => setTimeout(r, 600)); 
-
-    sItem.innerHTML = `✅ ${allSources[i]} Checked`;
-    sItem.style.color = "#00A651";
+// 4. यह हिस्सा स्क्रीन पर बटन दबाने वाले काम को संभालता है
+// (मान लेते हैं कि आपके HTML में बटन की ID 'searchBtn' और इनपुट की ID 'productInput' है)
+document.getElementById('searchBtn')?.addEventListener('click', async () => {
+    const inputField = document.getElementById('productInput');
+    const resultDiv = document.getElementById('scoreResult'); // जहाँ स्कोर दिखाना है
     
-    let progress = ((i + 1) / allSources.length) * 100;
-    pBar.style.width = progress + "%";
-    percentText.innerText = Math.round(progress) + "%";
-  }
+    if (inputField && resultDiv) {
+        const productName = inputField.value.trim();
+        if (productName === "") {
+            alert("कृपया पहले किसी प्रोडक्ट का नाम तो लिखिए!");
+            return;
+        }
 
-  // रिजल्ट दिखाना
-  setTimeout(() => {
-    document.getElementById('aiLoader').style.display = 'none';
-    document.getElementById('resultScreen').style.display = 'block';
-    document.getElementById('finalScore').innerText = (Math.random() * (9.5 - 6.5) + 6.5).toFixed(1);
-    document.getElementById('verdict').innerText = "Highly Recommended by CleverCart AI";
-  }, 500);
-                                    }
+        resultDiv.innerText = "Gemini AI जांच कर रहा है, कृपया रुकें...";
+        
+        // स्कोर मंगवा रहे हैं
+        const score = await getTrustScoreFromServer(productName);
+        
+        // स्क्रीन पर स्कोर दिखा रहे हैं
+        resultDiv.innerText = `इस प्रोडक्ट का Trust Score है: ${score}/10`;
+    }
+});
+
