@@ -1,6 +1,9 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
+# 🌟 यहाँ हम आपकी बनाई हुई 'analyzer.py' फाइल से असली AI स्कोर लाने वाले फंक्शन को बुला रहे हैं
+from analyzer import get_trust_score
+
 app = Flask(__name__)
 CORS(app)  # यह आपके index.html (फ्रंटएंड) को बैकएंड से आसानी से कनेक्ट करेगा
 
@@ -14,16 +17,27 @@ def home():
     })
 
 # 2. मुख्य AI API एंडपॉइंट (Product Analysis Feature)
-@app.route('/api/analyze', methods=['POST'])
+# 🌟 इसे हमने GET मेथड पर सेट किया है जैसा हमने आपके script.js में लिखा था
+@app.route('/api/analyze', methods=['GET'])
 def analyze_product():
-    data = request.get_json() or {}
-    product_name = data.get("product_name", "Unknown Product")
+    # जावास्क्रिप्ट (URL) से प्रोडक्ट का नाम खींचना
+    product_name = request.args.get('product')
+    
+    if not product_name:
+        return jsonify({
+            "status": "error",
+            "message": "कृपया प्रोडक्ट का नाम भेजें"
+        }), 400
+    
+    print(f"यूजर इस प्रोडक्ट को सर्च कर रहा है: {product_name}")
+    
+    # 🌟 यहाँ आपकी 'analyzer.py' फाइल काम करेगी और Gemini AI से असली 5-स्टार स्कोर लाएगी
+    star_rating = get_trust_score(product_name)
     
     return jsonify({
         "status": "success",
         "product": product_name,
-        "risk_score": 12,
-        "status_tag": "LOW RISK",
+        "trust_score": star_rating,  # यह हमारा असली 5-स्टार स्कोर है
         "message": "AI Analysis completed successfully."
     })
 
@@ -50,3 +64,4 @@ def get_resources():
 if __name__ == '__main__':
     # पोर्ट 5000 सेट है ताकि GitHub Codespaces इसे आसानी से पकड़ सके
     app.run(host='0.0.0.0', port=5000, debug=True)
+
