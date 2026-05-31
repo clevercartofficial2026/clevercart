@@ -1,4 +1,3 @@
-
 # CleverCart AI Engine 
 # 10 Sources Analysis Logic
 def get_trust_score(product_name):
