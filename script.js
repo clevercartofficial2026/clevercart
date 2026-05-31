@@ -1,17 +1,16 @@
-// 1. जब यूजर हमारी वेबसाइट पर "Search" या "Analyze" बटन दबाएगा, तब यह काम शुरू होगा
+// 1. यह फंक्शन बैकएंड (पायथन) से जुड़कर प्रोडक्ट का 5-स्टार स्कोर लेकर आएगा
 async function getTrustScoreFromServer(productName) {
     try {
-        // 2. यह लाइन हमारे पायथन बैकएंड (analyzer.py) को प्रोडक्ट का नाम भेजेगी
-        // अभी हम इसे लोकल सर्वर (localhost) के लिए सेट कर रहे हैं
+        // यह लाइन हमारे सर्वर (main.py) को प्रोडक्ट का नाम भेजेगी
         const response = await fetch(`http://127.0.0.1:5000/api/analyze?product=${encodeURIComponent(productName)}`);
         
         if (!response.ok) {
             throw new Error('सर्वर से कनेक्ट करने में कोई दिक्कत आई है!');
         }
 
-        // 3. सर्वर से जो स्कोर आएगा, उसे यहाँ रिसीव करेंगे
+        // सर्वर से जो डेटा आएगा, उसे यहाँ रिसीव करेंगे
         const data = await response.json();
-        return data.trust_score;
+        return data.trust_score; // यहाँ से हमें 5 में से नंबर मिलेगा
 
     } catch (error) {
         console.error("ओह! एरर आया:", error);
@@ -19,11 +18,10 @@ async function getTrustScoreFromServer(productName) {
     }
 }
 
-// 4. यह हिस्सा स्क्रीन पर बटन दबाने वाले काम को संभालता है
-// (मान लेते हैं कि आपके HTML में बटन की ID 'searchBtn' और इनपुट की ID 'productInput' है)
+// 2. यह हिस्सा स्क्रीन पर बटन दबने के बाद का काम संभालता है
 document.getElementById('searchBtn')?.addEventListener('click', async () => {
     const inputField = document.getElementById('productInput');
-    const resultDiv = document.getElementById('scoreResult'); // जहाँ स्कोर दिखाना है
+    const resultDiv = document.getElementById('scoreResult'); // जहाँ हमें स्टार रेटिंग दिखानी है
     
     if (inputField && resultDiv) {
         const productName = inputField.value.trim();
@@ -32,13 +30,13 @@ document.getElementById('searchBtn')?.addEventListener('click', async () => {
             return;
         }
 
-        resultDiv.innerText = "Gemini AI जांच कर रहा है, कृपया रुकें...";
+        // यूजर को पता चले कि काम चल रहा है, इसलिए यह मैसेज दिखेगा
+        resultDiv.innerText = "Gemini AI रिव्यूज की जांच कर रहा है, कृपया रुकें...";
         
-        // स्कोर मंगवा रहे हैं
+        // अब हम ऊपर वाले फंक्शन को बोलकर स्कोर मंगवा रहे हैं
         const score = await getTrustScoreFromServer(productName);
         
-        // स्क्रीन पर स्कोर दिखा रहे हैं
-        resultDiv.innerText = `इस प्रोडक्ट का Trust Score है: ${score}/10`;
+        // यहाँ स्क्रीन पर ग्राहकों को 5-स्टार फॉर्मेट में स्कोर दिखेगा (जैसे ⭐ 4.5 / 5)
+        resultDiv.innerText = `इस प्रोडक्ट का CleverCart Trust Score है: ⭐ ${score} / 5`;
     }
 });
-
