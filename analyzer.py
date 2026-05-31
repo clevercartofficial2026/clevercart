@@ -4,7 +4,7 @@ import google.generativeai as genai
 
 # 2. यहाँ आपको अपनी जादुई चाबी (Gemini API Key) डालनी है
 # जो चाबी आपके पास है, उसे नीचे वाले सिंगल कोट ' ' के बीच में लिख दें
-GEMINI_API_KEY = 'यहाँ_अपनी_GEMINI_API_KEY_पेस्ट_करें'
+GEMINI_API_KEY = 'AIzaSyDQFZ09xJmzy_6q0YJnaqE4ncqaC7Xk11s'
 
 # 3. यह लाइन गूगल को आपकी चाबी दिखाकर काम करने की परमिशन लेगी
 genai.configure(api_key=GEMINI_API_KEY)
