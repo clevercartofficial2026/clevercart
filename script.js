@@ -1,5 +1,5 @@
 // 🌟 यहाँ अपनी असली Gemini API Key पेस्ट करें जो आपके पास है
-const GEMINI_API_KEY = 'यहाँ_अपनी_GEMINI_API_KEY_पेस्ट_करें';
+const GEMINI_API_KEY = 'AIzaSyDQFZ09xJmzy_6q0YJnaqE4ncqaC7Xk11s';
 
 async function getTrustScoreFromServer(productName) {
     try {
